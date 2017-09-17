@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<routes>
+<route url="/" module="Billets" action="index" ></route>
+<route url="/commenter-([0-9]+)\.html" module="Billets" action="insertComment" vars="billets" />
+<route url="/billets-([0-9]+)\.html" module="Billets" action="show" vars="id" />
+<route url="/accueil.html" module="billets" action="accueil" />
+</routes>

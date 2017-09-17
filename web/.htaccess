@@ -1,0 +1,9 @@
+RewriteEngine On
+
+RewriteEngine On
+
+RewriteRule ^admin/ bootstrap.php?app=backend [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+
+RewriteRule ^(.*)$ bootstrap.php?app=frontend [QSA,L]
