@@ -10,10 +10,10 @@
     <?= isset($erreurs) && in_array(\entity\Billets::CONTENU_INVALIDE, $erreurs) ? 'Le contenu est invalide.<br />' : '' ?>
     <label>Texte</label><textarea rows="8" cols="60" name="contenu"><?= isset($billets) ? $billets['contenu'] : '' ?></textarea><br />
 <?php
-if(isset($news) && !$news->isNew())
+if(isset($billets) && !$billets->isNew())
 {
 ?>
-    <input type="hidden" name="id" value="<?= $news['id'] ?>" />
+    <input type="hidden" name="id" value="<?= $billets['id'] ?>" />
     <input type="submit" value="Modifier" name="modifier" />
 <?php
 }
