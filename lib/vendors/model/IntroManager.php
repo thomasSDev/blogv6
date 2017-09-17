@@ -36,10 +36,10 @@ abstract class IntroManager extends Manager
   abstract public function getUnique(Intro $intro);
  
    /**
-   * Méthode retournant une liste de billets demandée.
-   * @param $debut int le première billets à sélectionner
-   * @param $limite int Le nombre de billets à sélectionner
-   * @return array le liste des billets. Chaque entrée est une instance de billets.
+   * Méthode retournant une liste de intro demandée.
+   * @param $debut int le première intro à sélectionner
+   * @param $limite int Le nombre de intro à sélectionner
+   * @return array le liste des intro. Chaque entrée est une instance de intro.
    */
   abstract public function getList($debut = -1, $limite = -1);
  
