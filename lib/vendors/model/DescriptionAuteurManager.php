@@ -36,16 +36,16 @@ abstract class DescriptionAuteurManager extends Manager
   abstract public function getUnique(DescriptionAuteur $descriptionAuteur);
  
    /**
-   * Méthode retournant une liste de billets demandée.
-   * @param $debut int le première billets à sélectionner
-   * @param $limite int Le nombre de billets à sélectionner
-   * @return array le liste des billets. Chaque entrée est une instance de billets.
+   * Méthode retournant une liste de descriptionAuteur demandée.
+   * @param $debut int le première descriptionAuteur à sélectionner
+   * @param $limite int Le nombre de descriptionAuteur à sélectionner
+   * @return array le liste des descriptionAuteur. Chaque entrée est une instance de descriptionAuteur.
    */
   abstract public function getList($debut = -1, $limite = -1);
  
   /**
    * Méthode permettant de modifier une DescriptionAuteur.
-   * @param $DescriptionAuteur le billet à modifier
+   * @param $DescriptionAuteur le descriptionAuteur à modifier
    * @return void
    */
   abstract protected function modify(DescriptionAuteur $descriptionAuteur);
