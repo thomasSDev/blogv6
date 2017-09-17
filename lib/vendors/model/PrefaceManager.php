@@ -9,7 +9,7 @@ abstract class PrefaceManager extends Manager
   
   /**
    * Méthode permettant d'enregistrer une preface.
-   * @param $preface preface le billet à enregistrer
+   * @param $preface preface la preface à enregistrer
    * @see self::add()
    * @see self::modify()
    * @return void
@@ -30,16 +30,16 @@ abstract class PrefaceManager extends Manager
  
   /**
    * Méthode retournant une preface précise.
-   * @param $id int L'identifiant du billet à récupérer
-   * @return preface le preface demandée
+   * @param $id int L'identifiant de la preface à récupérer
+   * @return preface la preface demandée
    */
   abstract public function getUnique(Preface $preface);
  
    /**
-   * Méthode retournant une liste de billets demandée.
-   * @param $debut int le première billets à sélectionner
-   * @param $limite int Le nombre de billets à sélectionner
-   * @return array le liste des billets. Chaque entrée est une instance de billets.
+   * Méthode retournant une liste de prefaces demandée.
+   * @param $debut int le première preface à sélectionner
+   * @param $limite int Le nombre de prefaces à sélectionner
+   * @return array le liste des prefaces. Chaque entrée est une instance de preface.
    */
   abstract public function getList($debut = -1, $limite = -1);
  
