@@ -1,4 +1,4 @@
-<form action="" method="post">
+<form name="formulaire" id="formulaire" action="" method="post">
   <p>
     <?= isset($erreurs) && in_array(\entity\Billets::AUTEUR_INVALIDE, $erreurs) ? 'L\'auteur est invalide.<br />' : '' ?>
     <label>Auteur</label>
@@ -8,7 +8,7 @@
     <label>Titre</label><input type="text" name="titre" value="<?= isset($billets) ? $billets['titre'] : '' ?>" /><br />
  
     <?= isset($erreurs) && in_array(\entity\Billets::CONTENU_INVALIDE, $erreurs) ? 'Le contenu est invalide.<br />' : '' ?>
-    <label>Texte</label><textarea rows="8" cols="60" name="contenu"><?= isset($billets) ? $billets['contenu'] : '' ?></textarea><br />
+    <label>Texte</label><textarea rows="30" cols="100" name="contenu"><?= isset($billets) ? $billets['contenu'] : '' ?></textarea><br />
 <?php
 if(isset($billets) && !$billets->isNew())
 {
