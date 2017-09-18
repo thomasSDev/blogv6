@@ -20,6 +20,8 @@ $modelLoader->register();
 $entityLoader = new SplClassLoader('entity', __DIR__.'/../lib/vendors');
 $entityLoader->register();
  
+
+
 // Il ne nous suffit plus qu'à déduire le nom de la classe et à l'instancier
 $appClass = 'app\\'.$_GET['app'].'\\'.$_GET['app'].'application';
  

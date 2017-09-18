@@ -39,16 +39,14 @@ class BilletsController extends BackController
     $this->page->addVar('nombreBillets', $manager->count());
   }
  
-  public function executeInsert(HTTPRequest $request)
+ public function executeInsert(HTTPRequest $request)
   {
-    if ($request->postExists('auteur'))
-    {
-      $this->processForm($request);
-    }
- 
-    $this->page->addVar('title', 'Ajout d\'une billets');
+    $this->processForm($request);
+
+    $this->page->addVar('title', 'Ajout d\'une news');
   }
- 
+
+  
   public function executeUpdate(HTTPRequest $request)
   {
     if ($request->postExists('auteur'))
@@ -67,60 +65,78 @@ class BilletsController extends BackController
   {
     $this->page->addVar('title', 'Modification d\'un commentaire');
  
-    if ($request->postExists('pseudo'))
+    if ($request->method() == 'POST')
     {
       $comment = new Comment([
         'id' => $request->getData('id'),
-        'auteur' => $request->postData('pseudo'),
+        'auteur' => $request->postData('auteur'),
         'contenu' => $request->postData('contenu')
       ]);
- 
-      if ($comment->isValid())
-      {
-        $this->managers->getManagerOf('Comments')->save($comment);
- 
-        $this->app->user()->setFlash('Le commentaire a bien été modifié !');
- 
-        $this->app->httpResponse()->redirect('/billets-'.$request->postData('billets').'.html');
-      }
-      else
-      {
-        $this->page->addVar('erreurs', $comment->erreurs());
-      }
- 
-      $this->page->addVar('comment', $comment);
     }
     else
     {
-      $this->page->addVar('comment', $this->managers->getManagerOf('Comments')->get($request->getData('id')));
+      $comment = $this->managers->getManagerOf('Comments')->get($request->getData('id'));
     }
+ 
+    $formBuilder = new CommentFormBuilder($comment);
+    $formBuilder->build();
+ 
+    $form = $formBuilder->form();
+ 
+    $formHandler = new FormHandler($form, $this->managers->getManagerOf('Comments'), $request);
+ 
+    if ($formHandler->process())
+    {
+      $this->app->user()->setFlash('Le commentaire a bien été modifié');
+ 
+      $this->app->httpResponse()->redirect('/admin/');
+    }
+ 
+    $this->page->addVar('form', $form->createView());
   }
  
   public function processForm(HTTPRequest $request)
   {
-    $billets = new Billets([
-      'auteur' => $request->postData('auteur'),
-      'titre' => $request->postData('titre'),
-      'contenu' => $request->postData('contenu')
-    ]);
- 
-    // L'identifiant du billet est transmis si on veut le modifier.
-    if ($request->postExists('id'))
+    if ($request->method() == 'POST')
     {
-      $billets->setId($request->postData('id'));
-    }
+      $billets = new Billets([
+        'auteur' => $request->postData('auteur'),
+        'titre' => $request->postData('titre'),
+        'contenu' => $request->postData('contenu')
+      ]);
  
-    if ($billets->isValid())
-    {
-      $this->managers->getManagerOf('Billets')->save($billets);
- 
-      $this->app->user()->setFlash($billets->isNew() ? 'le billets a bien été ajoutée !' : 'le billets a bien été modifiée !');
+      if ($request->getExists('id'))
+      {
+        $billets->setId($request->getData('id'));
+      }
     }
     else
     {
-      $this->page->addVar('erreurs', $billets->erreurs());
+      // L'identifiant de la billets est transmis si on veut la modifier
+      if ($request->getExists('id'))
+      {
+        $billets = $this->managers->getManagerOf('Billets')->getUnique($request->getData('id'));
+      }
+      else
+      {
+        $billets = new Billets;
+      }
     }
  
-    $this->page->addVar('billets', $billets);
+    $formBuilder = new BilletsFormBuilder($billets);
+    $formBuilder->build();
+ 
+    $form = $formBuilder->form();
+ 
+    $formHandler = new FormHandler($form, $this->managers->getManagerOf('Billets'), $request);
+ 
+    if ($formHandler->process())
+    {
+      $this->app->user()->setFlash($billets->isNew() ? 'Le Billets a bien été ajoutée !' : 'Le Billets a bien été modifiée !');
+ 
+      $this->app->httpResponse()->redirect('/admin/');
+    }
+ 
+    $this->page->addVar('form', $form->createView());
   }
 }
