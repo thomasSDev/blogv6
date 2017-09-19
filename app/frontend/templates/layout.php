@@ -1,5 +1,6 @@
 <?php $monUrl = "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; 
-echo $monUrl;     
+echo $monUrl; 
+var_dump($_SERVER['REQUEST_URI']);   
 ?>
 
 <!DOCTYPE html>
@@ -13,14 +14,14 @@ echo $monUrl;
       <?php include_once("header.php");  ?>
     </header>
     <div id="preface">
-      <?php if($monUrl == "http://localhost/"){ 
+      <?php if($_SERVER['REQUEST_URI'] == "/"){ 
 
         include_once("preface.php");
       }
       ?>
     </div>
     <div id="intro">
-      <?php if($monUrl == "http://localhost/accueil.html"){ 
+      <?php if($_SERVER['REQUEST_URI'] == "/accueil.html"){ 
 
         include_once("intro.php");
       }
@@ -47,7 +48,7 @@ echo $monUrl;
         </section>
       </div>
     <div id="descriptionAuteurLayout">
-      <?php if($monUrl == "http://localhost/accueil.html"){ 
+      <?php if($_SERVER['REQUEST_URI'] == "/accueil.html"){ 
 
         include_once("descriptionAuteur.php");
       }
