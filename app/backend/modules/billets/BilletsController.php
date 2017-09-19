@@ -3,8 +3,11 @@ namespace app\backend\modules\billets;
  
 use \fram\BackController;
 use \fram\HTTPRequest;
-use entity\Billets;
+use \entity\Billets;
 use \entity\Comment;
+use \formBuilder\CommentFormBuilder;
+use \formBuilder\BilletsFormBuilder;
+use \fram\FormHandler;
  
 class BilletsController extends BackController
 {
@@ -39,26 +42,19 @@ class BilletsController extends BackController
     $this->page->addVar('nombreBillets', $manager->count());
   }
  
- public function executeInsert(HTTPRequest $request)
+  public function executeInsert(HTTPRequest $request)
   {
     $this->processForm($request);
-
-    $this->page->addVar('title', 'Ajout d\'une news');
+ 
+    $this->page->addVar('title', 'Ajout d\'un billet');
   }
 
   
   public function executeUpdate(HTTPRequest $request)
   {
-    if ($request->postExists('auteur'))
-    {
-      $this->processForm($request);
-    }
-    else
-    {
-      $this->page->addVar('billets', $this->managers->getManagerOf('Billets')->getUnique($request->getData('id')));
-    }
+    $this->processForm($request);
  
-    $this->page->addVar('title', 'Modification d\'une billets');
+    $this->page->addVar('title', 'Modification d\'un billet');
   }
  
   public function executeUpdateComment(HTTPRequest $request)
@@ -83,7 +79,7 @@ class BilletsController extends BackController
  
     $form = $formBuilder->form();
  
-    $formHandler = new FormHandler($form, $this->managers->getManagerOf('Comments'), $request);
+    $formHandler = new fram\FormHandler($form, $this->managers->getManagerOf('Comments'), $request);
  
     if ($formHandler->process())
     {
@@ -94,7 +90,6 @@ class BilletsController extends BackController
  
     $this->page->addVar('form', $form->createView());
   }
- 
   public function processForm(HTTPRequest $request)
   {
     if ($request->method() == 'POST')
@@ -112,7 +107,7 @@ class BilletsController extends BackController
     }
     else
     {
-      // L'identifiant de la billets est transmis si on veut la modifier
+      // L'identifiant du billets est transmis si on veut le modifier
       if ($request->getExists('id'))
       {
         $billets = $this->managers->getManagerOf('Billets')->getUnique($request->getData('id'));
@@ -122,10 +117,10 @@ class BilletsController extends BackController
         $billets = new Billets;
       }
     }
- 
+  
     $formBuilder = new BilletsFormBuilder($billets);
     $formBuilder->build();
- 
+  
     $form = $formBuilder->form();
  
     $formHandler = new FormHandler($form, $this->managers->getManagerOf('Billets'), $request);
@@ -140,3 +135,15 @@ class BilletsController extends BackController
     $this->page->addVar('form', $form->createView());
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+

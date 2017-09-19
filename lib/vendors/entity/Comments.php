@@ -1,7 +1,7 @@
 <?php
 namespace entity;
  
-use \fram\entity;
+use \fram\Entity;
  
 class Comments extends Entity
 {

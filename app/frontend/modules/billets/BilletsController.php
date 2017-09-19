@@ -3,7 +3,11 @@ namespace app\frontend\modules\billets;
  
 use \fram\BackController;
 use \fram\HTTPRequest;
+use \entity\Billets;
 use \entity\Comments;
+use \fram\FormHandler;
+use \formBuilder\CommentFormBuilder;
+use \formBuilder\BilletsFormBuilder;
  
 class BilletsController extends BackController
 {

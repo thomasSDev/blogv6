@@ -87,8 +87,4 @@ class Route
   {
     return $this->varsNames;
   }
-  public function getUrl()
-  {
-    return $this->url;
-  }
 }
