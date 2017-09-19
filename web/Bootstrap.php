@@ -19,7 +19,9 @@ $modelLoader->register();
  
 $entityLoader = new SplClassLoader('entity', __DIR__.'/../lib/vendors');
 $entityLoader->register();
- 
+
+$entityLoader = new SplClassLoader('formBuilder', __DIR__.'/../lib/vendors');
+$entityLoader->register();
 
 
 // Il ne nous suffit plus qu'à déduire le nom de la classe et à l'instancier
