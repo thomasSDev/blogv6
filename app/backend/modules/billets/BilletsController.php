@@ -4,7 +4,7 @@ namespace app\backend\modules\billets;
 use \fram\BackController;
 use \fram\HTTPRequest;
 use \entity\Billets;
-use \entity\Comment;
+use \entity\Comments;
 use \formBuilder\CommentFormBuilder;
 use \formBuilder\BilletsFormBuilder;
 use \fram\FormHandler;

@@ -11,4 +11,20 @@
 <!--<link rel="stylesheet" href="/css/style.css" type="text/css" />-->
 <link rel="stylesheet" href="/css/bootstrap.css"  type="text/css">
 <script src="https://use.fontawesome.com/43be11b974.js"></script>
+<script type="text/javascript" src="/js/jquery-3.2.1.js"></script>
+
+<script type="text/javascript" src="/js/tiny_mce/tiny_mce.js"></script>
+<script type="text/javascript">
+
+tinyMCE.init({ mode : "textareas", 
+
+	theme : "advanced", 
+	plugins : "table, fullpage", 
+	theme_advanced_buttons3_add : "fullpage, tablecontrols",
+
+	valid_elements : "em/i,strike,u,strong/b,div[align],br,#p[align],-ol[type|compact],-ul[type|compact],-li"
+});
+
+</script>
+
 

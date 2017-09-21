@@ -24,7 +24,6 @@ $entityLoader->register();
 
 $entityLoader = new SplClassLoader('formBuilder', VENDORS.DS.'');
 $entityLoader->register();
-var_dump($entityLoader);
 
 // Il ne nous suffit plus qu'à déduire le nom de la classe et à l'instancier
 $appClass = 'app\\'.$_GET['app'].'\\'.$_GET['app'].'Application';

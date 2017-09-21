@@ -5,9 +5,9 @@ use \fram\BackController;
 use \fram\HTTPRequest;
 use \entity\Billets;
 use \entity\Comments;
-use \fram\FormHandler;
 use \formBuilder\CommentFormBuilder;
 use \formBuilder\BilletsFormBuilder;
+use \fram\FormHandler;
  
 class BilletsController extends BackController
 {
@@ -57,31 +57,38 @@ class BilletsController extends BackController
  
   public function executeInsertComment(HTTPRequest $request)
   {
-    $this->page->addVar('titre', 'Ajout d\'un commentaire');
- 
-    if ($request->postExists('pseudo'))
+    // Si le formulaire a été envoyé.
+    if ($request->method() == 'POST')
     {
       $comment = new Comments([
         'billets' => $request->getData('billets'),
         'pseudo' => $request->postData('pseudo'),
         'contenu' => $request->postData('contenu')
       ]);
- 
-      if ($comment->isValid())
-      {
-        $this->managers->getManagerOf('Comments')->save($comment);
- 
-        $this->app->user()->setFlash('Le commentaire a bien été ajouté, merci !');
- 
-        $this->app->httpResponse()->redirect('billets-'.$request->getData('billets').'.html');
-      }
-      else
-      {
-        $this->page->addVar('erreurs', $comment->erreurs());
-      }
- 
-      $this->page->addVar('comment', $comment);
     }
+    else
+    {
+      $comment = new Comments;
+    }
+ 
+    $formBuilder = new CommentFormBuilder($comment);
+    $formBuilder->build();
+ 
+    $form = $formBuilder->form();
+ 
+    $formHandler = new FormHandler($form, $this->managers->getManagerOf('Comments'), $request);
+ 
+    if ($formHandler->process())
+    {
+      $this->app->user()->setFlash('Le commentaire a bien été ajouté, merci !');
+ 
+      $this->app->httpResponse()->redirect('billets-'.$request->getData('billets').'.html');
+    }
+ 
+    $this->page->addVar('comments', $comment);
+    $this->page->addVar('form', $form->createView());
+    $this->page->addVar('title', 'Ajout d\'un commentaire');
+  
   }
 
 
