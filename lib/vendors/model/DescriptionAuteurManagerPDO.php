@@ -55,4 +55,14 @@ class DescriptionAuteurManagerPDO extends DescriptionAuteurManager
  
     $requete->execute();
   }
+      public function get($id)
+  {
+    $q = $this->dao->prepare('SELECT id, auteur, contenu, dateAjout FROM description_auteur WHERE id = :id');
+    $q->bindValue(':id', (int) $id, \PDO::PARAM_INT);
+    $q->execute();
+ 
+    $q->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\entity\DescriptionAuteur');
+ 
+    return $q->fetch();
+  }
 }

@@ -6,4 +6,7 @@
   <route url="/admin/billets-delete-([0-9]+)\.html" module="Billets" action="delete" vars="id" />
   <route url="/admin/comment-update-([0-9]+)\.html" module="Billets" action="updateComment" vars="id" />
   <route url="/admin/comment-delete-([0-9]+)\.html" module="Billets" action="deleteComment" vars="id" />
+  <route url="/admin/preface-update-([0-9]+)\.html" module="Billets" action="updatePreface" vars="id" />
+  <route url="/admin/intro-update-([0-9]+)\.html" module="Billets" action="updateIntro" vars="id" />
+  <route url="/admin/descriptionAuteur-update-([0-9]+)\.html" module="Billets" action="updateDescriptionAuteur" vars="id" />
 </routes>

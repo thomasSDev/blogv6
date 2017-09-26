@@ -25,6 +25,13 @@ foreach ($comments as $comment)
     </legend>
     <p><?= nl2br(htmlspecialchars($comment['contenu'])) ?></p>
   </fieldset>
+  <?php 
+  	if ($user->isAuthenticated()) { ?>
+  		<p><a href="/admin/comment-update-<?= $comment['id'] ?>.html">Modifier le commentaire</a></p>
+  		<p><a href="/admin/comment-delete-<?= $comment['id'] ?>.html">Supprimer le commentaire</a></p>
+	<?php 
+	} ?>
+  
 <?php
 }
 ?>

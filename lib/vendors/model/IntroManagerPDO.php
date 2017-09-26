@@ -55,4 +55,14 @@ class IntroManagerPDO extends IntroManager
  
     $requete->execute();
   }
+      public function get($id)
+  {
+    $q = $this->dao->prepare('SELECT id, auteur, contenu, dateAjout FROM intro WHERE id = :id');
+    $q->bindValue(':id', (int) $id, \PDO::PARAM_INT);
+    $q->execute();
+ 
+    $q->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\entity\Intro');
+ 
+    return $q->fetch();
+  }
 }
