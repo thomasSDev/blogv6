@@ -43,7 +43,7 @@ class BilletsController extends BackController
   public function executeShow(HTTPRequest $request)
   {
 
-    $billets = $this->managers->getManagerOf('Billets')->getUnique($request->getData('id'));
+    $billets = ->getUnique($request->getData('id'));
  
     if (empty($billets))
     {

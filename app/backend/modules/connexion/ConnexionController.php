@@ -3,6 +3,7 @@ namespace app\backend\modules\connexion;
  
 use \fram\BackController;
 use \fram\HTTPRequest;
+use \entity\User;
  
 class ConnexionController extends BackController
 {
@@ -15,7 +16,7 @@ class ConnexionController extends BackController
       $login = $request->postData('login');
       $password = $request->postData('password');
  
-      if ($login == $this->app->config()->get('login') && $password == $this->app->config()->get('pass'))
+      if ($login == $this->getUnique($request->getData('login')) && $password == $this->managers->addVar('passe'))
       {
         $this->app->user()->setAuthenticated(true);
         $this->app->httpResponse()->redirect('.');
