@@ -9,9 +9,9 @@ class UserManagerPDO extends UserManager
   public function getUnique(User $user)
   {
     $requete = $this->dao->prepare('SELECT id, pseudo, passe FROM identifiants');
-    $requete->bindValue(':titre', $user->titre());
-    $requete->bindValue(':auteur', $user->auteur());
-    $requete->bindValue(':contenu', $user->contenu());
+    $requete->bindValue(':id', $user->id());
+    $requete->bindValue(':pseudo', $user->pseudo());
+    $requete->bindValue(':passe', $user->passe());
     $user = $requete->fetch();
  
     $requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\entity\User');

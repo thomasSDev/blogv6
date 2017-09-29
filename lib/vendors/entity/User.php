@@ -3,7 +3,7 @@ namespace entity;
 
 use \fram\Entity;
 
-class Billets extends Entity
+class User extends Entity
 {
   protected $pseudo,
             $passe;
