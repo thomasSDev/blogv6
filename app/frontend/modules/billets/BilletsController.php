@@ -60,11 +60,14 @@ class BilletsController extends BackController
     // Si le formulaire a été envoyé.
     if ($request->method() == 'POST')
     {
+
       $comment = new Comments([
         'billets' => $request->getData('billets'),
         'pseudo' => $request->postData('pseudo'),
         'contenu' => $request->postData('contenu')
+
       ]);
+      
     }
     else
     {
@@ -89,11 +92,20 @@ class BilletsController extends BackController
     $this->page->addVar('form', $form->createView());
     $this->page->addVar('title', 'Ajout d\'un commentaire');
   
-  }
+    }
 
+    public function executeSignalerComment(HTTPRequest $request)
+    {
+        $manager = $this->managers->getManagerOf('Comments');
+        $comment = $manager->get($request->getData('id'));
+        $manager->signaler($comment);
 
-  public function executeAccueil(HTTPRequest $request)
-  {
+        $this->app->user()->setFlash('Le commentaire a bien été signalé, merci !');
+        $this->app->httpResponse()->redirect('billets-'.$comment->billets().'.html');
+    }
+
+    public function executeAccueil(HTTPRequest $request)
+    {
 
     //Texte d'introduction
     $nombreIntro = $this->app->config()->get('nombre_intro');

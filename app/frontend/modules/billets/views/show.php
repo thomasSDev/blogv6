@@ -16,24 +16,18 @@ if (empty($comments))
 <?php
 }
  
-foreach ($comments as $comment)
-{
-?>
-  <fieldset>
-    <legend>
-      Posté par <strong><?= htmlspecialchars($comment['pseudo']) ?></strong> le <?= $comment['dateAjout']->format('d/m/Y à H\hi') ?>
-    </legend>
-    <p><?= nl2br(htmlspecialchars($comment['contenu'])) ?></p>
-  </fieldset>
-  <?php 
-  	if ($user->isAuthenticated()) { ?>
+foreach ($comments as $comment) : ?>
+	<fieldset>
+		<legend>
+			Posté par <strong><?= htmlspecialchars($comment['pseudo']) ?></strong> le <?= $comment['dateAjout']->format('d/m/Y à H\hi') ?>
+		</legend>
+		<p><?= nl2br(htmlspecialchars($comment['contenu'])) ?></p>
+	</fieldset>
+	<?php if ($user->isAuthenticated()) : ?> 
   		<p><a href="/admin/comment-update-<?= $comment['id'] ?>.html">Modifier le commentaire</a></p>
   		<p><a href="/admin/comment-delete-<?= $comment['id'] ?>.html">Supprimer le commentaire</a></p>
-	<?php 
-	} ?>
-  
-<?php
-}
-?>
- 
+	<?php endif ?>
+  	<p><a href="comment-signaler-<?= $comment['id'] ?>.html">Signaler un commentaire</a></p>
+<?php endforeach ?>
+
 <p><a href="commenter-<?= $billets['id'] ?>.html">Ajouter un commentaire</a></p>

@@ -9,3 +9,17 @@ foreach ($listeBillets as $billets)
 }
 ?>
 </table>
+<div id="listeCommentairesSignales">
+	<h2>Liste des commentaires signalés</h2>
+	<table>
+  <tr><th>pseudo</th><th>Titre</th><th>Contenu</th><th>Date d'ajout</th><th>Action</th></tr>
+
+	<?php foreach ($listeCommentairesSignales as $comment){
+		echo 	'<tr><td>', $comment['pseudo'], 
+				'</td><td>', $comment['titre'], 
+				'</td><td>le ', $comment['contenu'], 
+				'</td><td>', ($comment['dateAjout']->format('d/m/Y à H\hi')), 
+				'</td><td><a href=/admin/comment-update-',$comment["id"].'.html><img src="/images/update.png" alt="Modifier" /></a> 
+				<a href=/admin/comment-delete-', $comment['id'].'.html><img src="/images/delete.png" alt="Supprimer" /></a></td></tr>', "\n";
+	} ?>
+</div>

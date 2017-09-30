@@ -31,8 +31,8 @@ class BilletsController extends BackController
  
   public function executeDeleteComment(HTTPRequest $request)
   {
-    $this->managers->getManagerOf('Comments')->delete($request->getData('id'));
- 
+    $this->managers->getManagerOf('Comments')->deleteComment($request->getData('id'));
+  
     $this->app->user()->setFlash('Le commentaire a bien été supprimé !');
  
     $this->app->httpResponse()->redirect('.');
@@ -40,12 +40,21 @@ class BilletsController extends BackController
  
   public function executeIndex(HTTPRequest $request)
   {
+    //liste des billets
     $this->page->addVar('title', 'Gestion des billets');
  
     $manager = $this->managers->getManagerOf('Billets');
  
     $this->page->addVar('listeBillets', $manager->getList());
     $this->page->addVar('nombreBillets', $manager->count());
+
+    //commentaires signalés
+    $this->page->addVar('title', 'Modération des commentaires');
+ 
+    $manager = $this->managers->getManagerOf('Comments');
+ 
+    $this->page->addVar('listeCommentairesSignales', $manager->getCommentSignale());
+
   }
  
   public function executeInsert(HTTPRequest $request)
@@ -96,6 +105,7 @@ class BilletsController extends BackController
  
     $this->page->addVar('form', $form->createView());
   }
+
   public function executeUpdatePreface(HTTPRequest $request)
   {
     $this->page->addVar('title', 'Modification de la préface');

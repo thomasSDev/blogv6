@@ -1,4 +1,4 @@
-<div class="col-md-12">
+<!--<div class="col-md-12">
 	<div>
 		Voici le footer du blog
 	</div>
@@ -19,4 +19,4 @@
             <p><input type="submit" name="submit"></p>
 		</form>
 	</div>			
-</div>
+</div>-->
