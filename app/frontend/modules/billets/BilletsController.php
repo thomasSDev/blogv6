@@ -42,17 +42,17 @@ class BilletsController extends BackController
 
   public function executeShow(HTTPRequest $request)
   {
-
-    $billets = $this->managers->getManagerOf('Billets')->getUnique($request->getData('id'));
+    $manager = $this->managers->getManagerOf('Billets');
+    $billet = $manager->getUnique($request->getData('id'));
  
-    if (empty($billets))
+    if (empty($billet))
     {
       $this->app->httpResponse()->redirect404();
     }
  
-    $this->page->addVar('titre', $billets->titre());
-    $this->page->addVar('billets', $billets);
-    $this->page->addVar('comments', $this->managers->getManagerOf('Comments')->getListOf($billets->id()));
+    $this->page->addVar('titre', $billet->titre());
+    $this->page->addVar('billets', $billet);
+    $this->page->addVar('comments', $this->managers->getManagerOf('Comments')->getListOf($billet->id()));
   }
  
   public function executeInsertComment(HTTPRequest $request)
