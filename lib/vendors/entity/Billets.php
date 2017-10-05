@@ -89,4 +89,8 @@ class Billets extends Entity
   {
     return $this->dateModif;
   }
+  public function signale()
+  {
+    return $this->signale;
+  }
 }
