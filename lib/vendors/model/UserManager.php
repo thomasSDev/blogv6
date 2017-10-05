@@ -22,18 +22,13 @@ abstract class UserManager extends Manager
     }
     else
     {
-      throw new \RuntimeException('le billet doit être validée pour être enregistrée');
+      throw new \RuntimeException('le user doit être validée pour être enregistrée');
     }
   }
  
   
  
-  /**
-   * Méthode retournant une user précise.
-   * @param $id int L'identifiant du billet à récupérer
-   * @return user le user demandée
-   */
-  abstract public function getUnique(User $user);
+ 
  
    /**
    * Méthode retournant une liste de user demandée.
@@ -49,4 +44,6 @@ abstract class UserManager extends Manager
    * @return void
    */
   abstract protected function modify(User $user);
+
+  abstract public function getUser(User $user);
 }

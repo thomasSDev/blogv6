@@ -57,5 +57,6 @@ echo $monUrl;
         <?php include_once("footer.php"); ?>
       </footer>
     </div>
+    <?php include_once("scripts.php"); ?>
   </body>
 </html>

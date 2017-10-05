@@ -13,7 +13,7 @@
 foreach ($listePreface as $preface)
 {
 ?>
-  <h2><?= $preface['titre'] ?></a></h2>
+  
   <p><?= nl2br($preface['contenu']) ?></p>
 <?php
 }
